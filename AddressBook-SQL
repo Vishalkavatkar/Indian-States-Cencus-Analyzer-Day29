@@ -1,0 +1,216 @@
+UC1-
+
+mysql> create database AddressBook;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> show databases;
++---------------------+
+| Database            |
++---------------------+
+| adderessbookservice |
+| addressbook         |
+| addressnbook        |
+| information_schema  |
+| mysql               |
+| performance_schema  |
+| sakila              |
+| sys                 |
+| world               |
++---------------------+
+9 rows in set (0.01 sec)
+======================================================================================
+
+UC2 -
+
+mysql> use AddressBook;
+Database changed
+mysql> create table Contact(FirstName varchar(30), LastName varchar(30), Address varchar(50), City varchar(50), Zip int, PhoneNumber int, Email varchar(50));
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> desc Contact
+    -> ^C
+mysql> desc Contact;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| FirstName   | varchar(30) | YES  |     | NULL    |       |
+| LastName    | varchar(30) | YES  |     | NULL    |       |
+| Address     | varchar(50) | YES  |     | NULL    |       |
+| City        | varchar(50) | YES  |     | NULL    |       |
+| Zip         | int         | YES  |     | NULL    |       |
+| PhoneNumber | int         | YES  |     | NULL    |       |
+| Email       | varchar(50) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+================================================================================================
+
+UC3 - 
+
+mysql> insert into Contact values("Vishal", "Kavatkar", "124B", "Malvan", 416606, 94201962, "vkavatkar11@gmail.com");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into Contact values("Raj", "Dighe", "165T", "Dombivali", 410986, 9234562, "raj1@gmail.com");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into Contact values("Amol", "Nikam", "198H", "Kalyan", 456780, 98765234, "anikam@gmail.com");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Contact;
++-----------+----------+---------+-----------+--------+-------------+-----------------------+
+| FirstName | LastName | Address | City      | Zip    | PhoneNumber | Email                 |
++-----------+----------+---------+-----------+--------+-------------+-----------------------+
+| Vishal    | Kavatkar | 124B    | Malvan    | 416606 |    94201962 | vkavatkar11@gmail.com |
+| Raj       | Dighe    | 165T    | Dombivali | 410986 |     9234562 | raj1@gmail.com        |
+| Amol      | Nikam    | 198H    | Kalyan    | 456780 |    98765234 | anikam@gmail.com      |
++-----------+----------+---------+-----------+--------+-------------+-----------------------+
+3 rows in set (0.00 sec)
+======================================================================================================
+
+UC4-
+
+mysql> update Contact set Address="1456G" where FirstName = "Raj";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Contact;
++-----------+----------+---------+-----------+--------+-------------+-----------------------+
+| FirstName | LastName | Address | City      | Zip    | PhoneNumber | Email                 |
++-----------+----------+---------+-----------+--------+-------------+-----------------------+
+| Vishal    | Kavatkar | 124B    | Malvan    | 416606 |    94201962 | vkavatkar11@gmail.com |
+| Raj       | Dighe    | 1456G   | Dombivali | 410986 |     9234562 | raj1@gmail.com        |
+| Amol      | Nikam    | 198H    | Kalyan    | 456780 |    98765234 | anikam@gmail.com      |
++-----------+----------+---------+-----------+--------+-------------+-----------------------+
+3 rows in set (0.01 sec)
+========================================================================================================
+
+UC5-
+
+mysql> delete from Contact where FirstName = "Amol";
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Contact;
++-----------+----------+---------+-----------+--------+-------------+-----------------------+
+| FirstName | LastName | Address | City      | Zip    | PhoneNumber | Email                 |
++-----------+----------+---------+-----------+--------+-------------+-----------------------+
+| Vishal    | Kavatkar | 124B    | Malvan    | 416606 |    94201962 | vkavatkar11@gmail.com |
+| Raj       | Dighe    | 1456G   | Dombivali | 410986 |     9234562 | raj1@gmail.com        |
++-----------+----------+---------+-----------+--------+-------------+-----------------------+
+2 rows in set (0.00 sec)
+==========================================================================================================
+
+UC6-
+
+mysql> select FirstName from Contact where City = "Malvan";
++-----------+
+| FirstName |
++-----------+
+| Vishal    |
++-----------+
+1 row in set (0.00 sec)
+=========================================================================================================
+
+UC7-
+
+mysql> select count(City) from Contact group by City;
++-------------+
+| count(City) |
++-------------+
+|           1 |
+|           1 |
++-------------+
+2 rows in set (0.00 sec)
+==========================================================================================================
+
+UC8-
+
+mysql> select FirstName, LastName, City from Contact order by FirstName;
++-----------+----------+-----------+
+| FirstName | LastName | City      |
++-----------+----------+-----------+
+| Raj       | Dighe    | Dombivali |
+| Vishal    | Kavatkar | Malvan    |
++-----------+----------+-----------+
+2 rows in set (0.00 sec)
+=============================================================================================================
+
+UC9-
+
+mysql> alter table Contact add Type varchar(20);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Contact;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| FirstName   | varchar(30) | YES  |     | NULL    |       |
+| LastName    | varchar(30) | YES  |     | NULL    |       |
+| Address     | varchar(50) | YES  |     | NULL    |       |
+| City        | varchar(50) | YES  |     | NULL    |       |
+| Zip         | int         | YES  |     | NULL    |       |
+| PhoneNumber | int         | YES  |     | NULL    |       |
+| Email       | varchar(50) | YES  |     | NULL    |       |
+| Type        | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> UPDATE Contact SET Type="Family" WHERE FirstName="Vishal";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Contact SET Type="Friend" WHERE FirstName="Raj";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Contact;
++-----------+----------+---------+-----------+--------+-------------+-----------------------+--------+
+| FirstName | LastName | Address | City      | Zip    | PhoneNumber | Email                 | Type   |
++-----------+----------+---------+-----------+--------+-------------+-----------------------+--------+
+| Vishal    | Kavatkar | 124B    | Malvan    | 416606 |    94201962 | vkavatkar11@gmail.com | Family |
+| Raj       | Dighe    | 1456G   | Dombivali | 410986 |     9234562 | raj1@gmail.com        | Friend |
++-----------+----------+---------+-----------+--------+-------------+-----------------------+--------+
+2 rows in set (0.00 sec)
+=====================================================================================================================
+
+UC10-
+
+mysql> SELECT COUNT(*) FROM Contact GROUP BY Type;
++----------+
+| COUNT(*) |
++----------+
+|        1 |
+|        1 |
++----------+
+2 rows in set (0.01 sec)
+=========================================================================================================================
+
+UC11-
+
+mysql> insert into Contact values("Jijo", "Ch", "Farms", "Chennai", 42422, 356352521, "jijo@gmail.com", "Family");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Contact;
++-----------+----------+---------+-----------+--------+-------------+-----------------------+--------+
+| FirstName | LastName | Address | City      | Zip    | PhoneNumber | Email                 | Type   |
++-----------+----------+---------+-----------+--------+-------------+-----------------------+--------+
+| Vishal    | Kavatkar | 124B    | Malvan    | 416606 |    94201962 | vkavatkar11@gmail.com | Family |
+| Raj       | Dighe    | 1456G   | Dombivali | 410986 |     9234562 | raj1@gmail.com        | Friend |
+| Jijo      | Ch       | Farms   | Chennai   |  42422 |   356352521 | jijo@gmail.com        | Family |
++-----------+----------+---------+-----------+--------+-------------+-----------------------+--------+
+3 rows in set (0.01 sec)
+
+mysql> ^C
+mysql> insert into Contact values("Mok", "Ch", "Harms", "UP", 44422, 356352521, "mok@gmail.com", "Friend");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Contact;
++-----------+----------+---------+-----------+--------+-------------+-----------------------+--------+
+| FirstName | LastName | Address | City      | Zip    | PhoneNumber | Email                 | Type   |
++-----------+----------+---------+-----------+--------+-------------+-----------------------+--------+
+| Vishal    | Kavatkar | 124B    | Malvan    | 416606 |    94201962 | vkavatkar11@gmail.com | Family |
+| Raj       | Dighe    | 1456G   | Dombivali | 410986 |     9234562 | raj1@gmail.com        | Friend |
+| Jijo      | Ch       | Farms   | Chennai   |  42422 |   356352521 | jijo@gmail.com        | Family |
+| Mok       | Ch       | Harms   | UP        |  44422 |   356352521 | mok@gmail.com         | Friend |
++-----------+----------+---------+-----------+--------+-------------+-----------------------+--------+
+4 rows in set (0.00 sec)
