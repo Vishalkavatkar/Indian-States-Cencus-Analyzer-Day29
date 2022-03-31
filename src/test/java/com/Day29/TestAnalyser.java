@@ -7,6 +7,8 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * We have written the test cases here.
+ * @author Tom
+ *
  */
 public class TestAnalyser {
 	StateCensusAnalyser analyser;
@@ -24,5 +26,10 @@ public class TestAnalyser {
 	@Test
 	public void testFileCheckSad() throws InvalidFile {
 		analyser.loadData("src/main/resources/IndiaStateCensus.csv");
+	}
+	
+	@Test
+	public void testTypeCheckSad() throws InvalidFile {
+		analyser.loadData("src/main/resources/IndiaStateCensusDataWrong.csv");
 	}
 }
